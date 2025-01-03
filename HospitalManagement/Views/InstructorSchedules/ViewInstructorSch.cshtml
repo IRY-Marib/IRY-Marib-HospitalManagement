@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model ScheduleViewModel
+}
+<div class="container mt-4">
+         <h2>Instructor</h2>
+
+        <h2>My schedule</h2>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Day</th>
+                    <th>Shift</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.instructorSchedule)
+                {
+                    <tr>
+                        <td>@item.InstructorID</td>
+                        <td>@item.Instructor.Name @item.Instructor.Surname</td>
+                        <td>@item.day</td>
+                        <td>@item.shift</td>
+                        <td>@item.StartTime.ToString("hh:mm tt")</td>
+                        <td>@item.EndTime.ToString("hh:mm tt")</td>
+                        <td><a  class="btn btn-info">contact</a></td> 
+
+
+                   </tr>
+                }
+            </tbody>
+        </table>
+        <h2>My assistants schedule</h2>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                     <th>Day</th>
+
+                     <th>Shift</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+             <th>AVG Consultation time</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.assistantSchedule)
+                {
+                    <tr>
+                        <td>@item.AssistantID</td>
+                        <td>@item.Assistant.Name @item.Assistant.Surname</td>
+                        <td>@item.Department.Name</td>
+                        <td>@item.day</td>
+                        <td>@item.shift</td>
+                       <td>@item.StartTime.ToString("hh:mm tt")</td>
+                        <td>@item.EndTime.ToString("hh:mm tt")</td>
+                                     <th>@item.timeConsuming</th>
+
+                   </tr>
+                }
+            </tbody>
+        </table>
+
+        </div>

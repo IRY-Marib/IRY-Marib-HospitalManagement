@@ -1,0 +1,61 @@
+﻿@model AssistantSchedule;
+
+@{
+    ViewData["Title"] = "Create Schedule";
+}
+
+<section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+<div class="card">
+            <div class="card-body">
+                                <h5 class="text-center">Create Assistant Schedule</h5>
+
+<form asp-action="CreateAssistant"  class="row g-3">
+    
+    
+  <div class="col-12">      
+      <label asp-for="AssistantID" class="form-label"> Select a Assistant </label>
+        <select asp-for="AssistantID" class="form-control" asp-items="ViewBag.Assistants"></select>
+    </div>
+   <div class="col-12"> 
+        <label asp-for="DepartmentID" class="form-label">Select a Department </label>
+        <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.Departments"></select>
+    </div>
+    <div class="col-12"> 
+        <label asp-for="day" class="form-label">Select a Day</label>
+        <select asp-for="day" class="form-control" asp-items="Html.GetEnumSelectList<Days>()"></select>
+
+    </div>
+    <div class="col-12"> 
+        <label asp-for="shift" class="form-label">Select a Shift</label>
+        <select asp-for="shift" class="form-control" asp-items="Html.GetEnumSelectList<Shifts>()">
+        </select>
+
+    </div>
+   <div class="col-12"> 
+        <label asp-for="StartTime" class="form-label">Start Time </label>
+        <input asp-for="StartTime" class="form-control" type="time" />
+    </div>
+   <div class="col-12"> 
+        <label asp-for="EndTime" class="form-label">End Time></label>
+        <input asp-for="EndTime" class="form-control" type="time" />
+    </div>
+ <div class="col-12"> 
+        <label asp-for="timeConsuming" class="form-label"> AVG Consultation time (Minutes) </label>
+<select asp-for="timeConsuming" class="form-control" asp-items="Html.GetEnumSelectList<Minutes>()">
+        </select>
+        </div>
+
+
+                    <div class="text-center">
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+</div> 
+</div>
+</div>
+</div>
+</section>

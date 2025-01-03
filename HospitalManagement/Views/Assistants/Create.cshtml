@@ -1,0 +1,59 @@
+﻿@model Assistant;
+
+
+<section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+<div class="card">
+            <div class="card-body">
+                <h5 class="text-center">Create Assistant</h5>
+
+              <form asp-controller="Assistants" asp-action="Create" method="post" class="row g-3">
+                <div class="col-12">
+
+                  <label  for="Name" class="form-label"> Name</label>
+                  <input type="text" class="form-control" id="Name" name="Name">
+                  <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                  <label for="Surname" class="form-label"> SureName</label>
+                  <input type="text" class="form-control" name="Surname">
+                  <span asp-validation-for="Surname" class="text-danger"></span>
+
+                </div>
+                <div class="col-12">
+                  <label for="Email" class="form-label">Email</label>
+                   <select asp-for="Email" class="form-control" asp-items="ViewBag.userManager"></select>
+                                 <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                  <label for="PhoneNumber" class="form-label">PhoneNumber</label>
+                  <input type="text" class="form-control" name="PhoneNumber">
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                </div>
+                <div class="col-12">
+                  <label for="Address" class="form-label">Address</label>
+                  <input type="text" class="form-control" name="Address">
+                  <span asp-validation-for="Address" class="text-danger"></span>
+
+                </div>
+                 <div class="col-12">
+                  <label for="InstructorID" class="form-label">Select instructor</label>
+                  <select asp-for="InstructorID" class="form-control" asp-items="ViewBag.Instructors"></select>
+                  <span asp-validation-for="InstructorID" class="text-danger"></span>
+
+                </div>
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- Vertical Form -->
+
+            </div>
+</div>
+</div>
+
+</div>
+</section>

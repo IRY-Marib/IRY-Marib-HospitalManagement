@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model ScheduleViewModel
+}
+
+<div class="container mt-4">
+    <h2>My Calendar Schedule</h2>
+
+    <!-- FullCalendar Container -->
+    <div id="calendar"></div>
+</div>
+
+@*<div class="container mt-4">
+             <h2>Assistant</h2>
+
+        <h2>My schedule</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                     <th>Day</th>
+
+                     <th>Shift</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+             <th>AVG Consultation time</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.assistantSchedule)
+                {
+                    <tr>
+                        <td>@item.AssistantID</td>
+                        <td>@item.Assistant.Name @item.Assistant.Surname</td>
+                        <td>@item.Department.Name</td>
+                        <td>@item.day</td>
+                        <td>@item.shift</td>
+                       <td>@item.StartTime.ToString("hh:mm tt")</td>
+                        <td>@item.EndTime.ToString("hh:mm tt")</td>
+                                     <th>@item.timeConsuming</th>
+
+                   </tr>
+                }
+            </tbody>
+        </table>
+
+         <h2>My instructor schedule </h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Day</th>
+                    <th>Shift</th>
+                    <th>StartTime</th>
+                    <th>EndTime</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.instructorSchedule)
+                {
+                    <tr>
+                        <td>@item.InstructorID</td>
+                        <td>@item.Instructor.Name @item.Instructor.Surname</td>
+                        <td>@item.day</td>
+                        <td>@item.shift</td>
+                        <td>@item.StartTime.ToString("hh:mm tt")</td>
+                        <td>@item.EndTime.ToString("hh:mm tt")</td>
+                        <td><a  class="btn btn-info">contact</a></td> 
+
+
+                   </tr>
+                }
+            </tbody>
+        </table>
+        </div>*@
+        <script>
+           
+         
+    document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: @Html.Raw(Json.Serialize(Model.CalendarEvents)) // Pass events from your ViewModel
+    });
+
+    console.log(@Html.Raw(Json.Serialize(Model.CalendarEvents))); // Debug: Check events in the browser console
+    calendar.render();
+});
+
+</script>
+@*<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        events: '/your-api-endpoint', // Load your events dynamically
+        eventContent: function (arg) {
+            // Create a wrapper div
+            let wrapper = document.createElement('div');
+            wrapper.classList.add('fc-event-custom');
+
+            // Add event title
+            let title = document.createElement('div');
+            title.innerText = arg.event.title;
+            wrapper.appendChild(title);
+
+            // Add event department and shift (if needed)
+            if (arg.event.extendedProps.departmentName || arg.event.extendedProps.shift) {
+                let details = document.createElement('div');
+                details.innerText = `Department: ${arg.event.extendedProps.departmentName}, Shift: ${arg.event.extendedProps.shift}`;
+                wrapper.appendChild(details);
+            }
+
+            // Add a button
+            let button = document.createElement('button');
+            button.innerText = 'Take Appointment';
+            button.style.marginTop = '5px';
+            button.style.padding = '4px 8px';
+            button.style.backgroundColor = '#28a745';
+            button.style.color = 'white';
+            button.style.border = 'none';
+            button.style.borderRadius = '4px';
+            button.style.cursor = 'pointer';
+
+            // Button click event
+            button.addEventListener('click', function (event) {
+                event.stopPropagation(); // Prevent triggering other event clicks
+                alert(`Taking an appointment for: ${arg.event.title}`);
+                // Implement your custom logic here (e.g., open modal, redirect, etc.)
+            });
+
+            wrapper.appendChild(button);
+
+            // Return the DOM nodes
+            return { domNodes: [wrapper] };
+        }
+    });
+
+    calendar.render();
+});
+</script>*@

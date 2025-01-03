@@ -1,0 +1,83 @@
+﻿@inject SignInManager<IdentityUser> signInManager
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+        <a class="navbar-brand">HospitalManagement</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <!-- Left-Aligned Items -->
+            <ul class="navbar-nav">
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Emergency" asp-action="AddNews">Emergency</a>
+                    </li>
+                    
+                    <li class="nav-item  ms-auto">
+                        <a class="nav-link collapsed  text-dark" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-menu-button-wide"></i>
+                            <span>Setting</span>
+                            <i class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                            <li><a asp-controller="Instructors" asp-action="Index"><i class="bi bi-circle"></i><span>Instructors</span></a></li>
+                            <li><a asp-controller="Assistants" asp-action="Index"><i class="bi bi-circle"></i><span>Assistants</span></a></li>
+                            <li><a asp-controller="Departments" asp-action="Index"><i class="bi bi-circle"></i><span>Departments</span></a></li>
+                            <li><a asp-controller="AssistantSchedules" asp-action="Index"><i class="bi bi-circle"></i><span>Assistant Schedules</span></a></li>
+                            <li><a asp-controller="InstructorSchedules" asp-action="Index"><i class="bi bi-circle"></i><span>Instructor Schedules</span></a></li>
+                            <li><a asp-controller="Administration" asp-action="ListRoles"><i class="bi bi-circle"></i><span>Roles</span></a></li>
+                        </ul>
+                    </li>
+                }
+                else if (signInManager.IsSignedIn(User) && User.IsInRole("Assistant"))
+                {
+                                             <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AssistantSchedules" asp-action="ViewAssistantSch">Schedules</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Emergency" asp-action="News">Emergency News</a>
+                    </li>
+                }
+                else if (signInManager.IsSignedIn(User) && User.IsInRole("Instructor"))
+                {
+                                             <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="InstructorSchedules" asp-action="ViewInstructorSch">Schedules</a>
+                    </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Emergency" asp-action="News">Emergency News</a>
+                    </li>
+                }
+            </ul>
+
+            <!-- Right-Aligned Items -->
+            <ul class="navbar-nav ms-auto">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <form method="post" asp-action="logout" asp-controller="account">
+                            <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                <span class="text-dark">Logout   </span> @User.Identity!.Name
+                            </button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-action="register" asp-controller="account" class="nav-link text-dark">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  asp-action="login" asp-controller="account" class="nav-link text-dark">Login</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

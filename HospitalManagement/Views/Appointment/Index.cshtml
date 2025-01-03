@@ -1,0 +1,50 @@
+﻿
+@model List<AppointmentViewModel>
+
+<div class="container">
+    <h2>Available Appointments</h2>
+
+    <!-- Date Picker -->
+    <form method="get" action="">
+        <label for="selectedDate">Select a Date:</label>
+        <input type="date" id="selectedDate" name="selectedDate" value="@ViewBag.SelectedDate.ToString("yyyy-MM-dd")" />
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <!-- Appointments -->
+    @if (Model.Any())
+    {
+        foreach (var viewModel in Model)
+        {
+            var schedule = viewModel.Schedule;
+            var timeSlots = viewModel.TimeSlots;
+
+            <div class="schedule-card">
+                <h4>@schedule.day (@schedule.StartTime.ToString("hh:mm tt") - @schedule.EndTime.ToString("hh:mm tt"))</h4>
+                <p><strong>Assistant:</strong> @schedule.Assistant?.Name</p>
+                <p><strong>Department:</strong> @schedule.Department?.Name</p>
+                <p><strong>Shift:</strong> @schedule.shift</p>
+
+                <div class="time-slots">
+                    @foreach (var slot in timeSlots)
+                    {
+                        <button class="time-slot">
+                            @slot.Start.ToString("hh:mm tt") - @slot.End.ToString("hh:mm tt")
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No available schedules for the selected date.</p>
+    }
+</div>
+
+<!-- CSS -->
+<style>
+    .schedule-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+    .time-slots { display: flex; flex-wrap: wrap; gap: 10px; }
+    .time-slot { padding: 10px 20px; border: none; border-radius: 5px; background-color: #007bff; color: white; cursor: pointer; }
+</style>

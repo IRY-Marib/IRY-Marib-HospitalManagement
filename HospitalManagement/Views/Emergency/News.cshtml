@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Emergency>
+
+<h2>Emergency News</h2>
+
+@foreach (var news in Model)
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>@news.Title</h3>
+            <small class="text-muted">@news.CreatedAt</small>
+        </div>
+        <div class="card-body">
+            <p>@news.Content</p>
+        </div>
+    </div>
+}

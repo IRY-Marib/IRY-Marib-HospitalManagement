@@ -1,0 +1,43 @@
+﻿@model IEnumerable<InstructorSchedule>
+
+@{
+    ViewData["Title"] = "Schedules";
+}
+
+<h1>Schedules</h1>
+
+<p>
+    <a asp-action="CreateInstructor" class="btn btn-primary float-end">Add New Instructor Schedule</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Instructor</th>
+            <th>Day</th>
+            <th>Shift</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model)
+        {
+            <tr>
+                <td>@schedule.Instructor?.Name</td>
+                <td>@schedule.day</td>
+                <td>@schedule.shift</td>
+                <td>@schedule.StartTime.ToString("hh:mm tt")</td>
+                <td>@schedule.EndTime.ToString("hh:mm tt")</td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@schedule.InstructorScheduleId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@schedule.InstructorScheduleId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@schedule.InstructorScheduleId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

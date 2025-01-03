@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    @
+*@
+@{
+    ViewBag.Title = "Assistance";
+}
+@model  List<Assistant>;
+@{
+
+  
+      <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center">Assistants</h5>
+              <a class="btn btn-primary float-end "  asp-controller="Assistants" asp-action="Create">Add New Assistant</a>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>
+                      <b>A</b>ssistantID
+                    </th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th data-type="email">Email</th>
+                    <th>PhoneNumber</th>
+                      <th>Address</th>
+                       <th>Instructor</th>
+                       <th>Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach(var list in  Model)
+                {
+                  <tr>
+                    <td>@list.AssistantID</td>
+                    <td>@list.Name</td>
+                    <td>@list.Surname</td>
+                    <td>@list.Email</td>
+                    <td>@list.PhoneNumber</td>
+                    <th>@list.Address   </th>
+                    <th>@list.Instructor?.Name   </th>
+
+                    <td><a asp-controller="Assistants"   asp-action="Edit" asp-route-id="@list.AssistantID" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Assistants"   asp-action="Delete" asp-route-id="@list.AssistantID" class="btn btn-danger">Delete</a></td>
+
+
+                  </tr>
+                }
+                 
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+}

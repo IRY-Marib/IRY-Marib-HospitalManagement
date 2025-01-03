@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AssistantSchedule>
+
+@{
+    ViewData["Title"] = "Schedules";
+}
+
+<h1>Schedules</h1>
+
+<p>
+    <a asp-action="CreateAssistant" class="btn btn-primary float-end">Add New Assistant Schedule</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Assistant</th>
+            <th>Department</th>
+            <th>Day</th>
+            <th>Shift</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+             <th>AVG Consultation time</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model)
+        {
+            <tr>
+                <td>@schedule.Assistant?.Name</td>
+                <td>@schedule.Department?.Name</td>
+                <td>@schedule.day</td>
+                <td>@schedule.shift</td>
+                <td>@schedule.StartTime.ToString("hh:mm tt")</td>
+                <td>@schedule.EndTime.ToString("hh:mm tt")</td>
+                 <td>@schedule.timeConsuming</td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@schedule.AssistantScheduleId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@schedule.AssistantScheduleId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@schedule.AssistantScheduleId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
